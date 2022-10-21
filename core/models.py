@@ -22,7 +22,7 @@ class Product(models.Model):
 
 class Item(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return self.product.name
@@ -42,3 +42,15 @@ class Order(models.Model):
     Cart = models.ForeignKey(Cart,on_delete = models.CASCADE, null = True)
     def __str__(self):
         return str(f'{self.order_by} {self.created} id: {self.id}')
+
+
+class CartNew(models.Model):
+    user = models.OneToOneField (User,on_delete=models.CASCADE)
+    # item = models.ManyToManyField(Item,blank=True)
+    product = models.ManyToManyField(Product)
+    quantity = models.PositiveSmallIntegerField()
+    
+    def __str__(self) -> str:
+        return str(self.user)
+
+    
