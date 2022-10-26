@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,12 +11,18 @@
       integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
       crossorigin="anonymous"
     />
+     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
   </head>
   <body>
         <!-- <h1 class="lead">Ecommerce Project</h1> -->
     <nav class="navbar navbar-expand-lg"   style="background-color: #e3f2fd;">
       <div class="container">
-        <a class="navbar-brand" href="#">Samaan Lelo!</a>
+        <a class="navbar-brand" href="">Samaan Lelo!</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -49,7 +56,7 @@
                 More
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/MyOrders/">Orders</a></li>
+                <li><a class="dropdown-item" href="/myorders/">Orders</a></li>
                 <li><a class="dropdown-item" href="/ContactUs">Contact Us</a></li>
                 <li>
                   <a class="dropdown-item" href="/AboutUs">About Us</a>
@@ -78,6 +85,8 @@
       <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
       <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
     </ul>
+     {% comment %} <i class="fa-solid fa-user-chef"></i> <!-- uses solid style --> {% endcomment %}
+    {% comment %} <i class="fa-brands fa-github-square"></i> <!-- uses brand style --> {% endcomment %}
   </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

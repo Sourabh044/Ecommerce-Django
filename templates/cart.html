@@ -1,28 +1,39 @@
 {% extends 'base.html' %} {% block title %}Cart{% endblock %} {% load static %}
-{%block content%} 
-<hr>
+{%block content%}
+<hr />
 <div class="my-2">
-{%for item in cart%}
-<div class="card mb-3" style="max-width: 540px">
-  <div class="row g-0">
-    <div class="col-md-4">
-    <img src="{{item.product.image.url}}" class="img-fluid rounded-start" alt="..." /> 
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{item.product.name}}</h5>
-        <p class="card-text">{{item.product.description}}</p>
-        <p class="card-text">
-          <small class="text-muted">Last updated 3 mins ago</small>
-        </p>
+
+  {%for item in cart%}
+  <div class="card mb-3" style="max-width: 540px">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img
+          src="{{item.product.image.url}}"
+          class="img-fluid rounded-start"
+          alt="..."
+        />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{item.product.name}}</h5>
+          <p class="card-text">{{item.quantity}}</p>
+          <p class="card-text">
+            {% comment %} <a "></a> {% endcomment %}
+            <a type="button" class="btn btn-danger" href="/cart/{{item.id}}"><i class="fa-solid fa-trash-can"></i> Remove From Cart</a>
+          </p>
+        </div>
       </div>
     </div>
   </div>
+  <hr>
+  {%endfor%}
 </div>
-{%endfor%}
-</div>
-    {% if status %}
-    <a href="/products/buy/" class="btn btn-primary">Place Order</a>
-    {% endif %}
-
+{% if status %}
+<a href="/products/buy/" class="btn btn-primary">Place Order</a>
+{% else %}
+    <div class="container">
+    <h4 class='lead'>No items in Cart</h4>
+    </div>
+{% endif %}
  {%endblock%}
+

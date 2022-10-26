@@ -32,15 +32,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'fontawesomefree',
+
     'core',
     
 ]
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,8 +85,13 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.postgres',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        # 'NAME': os.path.join(BASE_DIR, 'ecommerce.sqlite3'),
+        'NAME': 'ecommerce',
+        'USER': 'postgres',
+        'PASSWORD': 'Ecommercepass',
+        'HOST': '',
     }
 }
 
