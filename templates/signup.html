@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block title %}Cart{% endblock %} {% load static %}
+{%block content%}
+<h1 class='my-2'>Create Account</h1>
+<hr>
+<form method = 'post'>
+    {% csrf_token %}
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text"  name='username'class="form-control" id="username" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+  </div>
+  <button type="submit" class="btn btn-dark">Signup</button>
+</form>
+{%endblock%}

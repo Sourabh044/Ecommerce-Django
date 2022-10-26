@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Products{% endblock %}
+{% load static %}
+{%block content%}
+  {%for address in addresses %}
+<div class="card my-2">
+  <div class="card-body">
+    <p>{{address.pincode}}<p>
+    <span>{{address.landmark}}</span>
+  </div>
+</div>
+  {% endfor %}
+
+{%endblock%}

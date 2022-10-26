@@ -84,3 +84,6 @@ class address(models.Model):
         return f"{self.pincode}"
 
     
+# class Dummy(models.Model):
+#     f = models.FloatField()
+

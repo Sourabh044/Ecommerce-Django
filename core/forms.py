@@ -4,4 +4,4 @@ from .models import address
 class AddressForm(ModelForm):
     class Meta:
         model = address
-        fields = ['lat','lng',]
+        fields = ['lat','lng']
