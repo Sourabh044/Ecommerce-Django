@@ -25,7 +25,7 @@ def CartView(request, pk=None):
         return redirect('login')
     if not pk:
         cart = Cart.objects.filter(user=request.user)
-         cart = cart.filter(order_status=False)
+        cart = cart.filter(order_status=False)
         return render(request, "cart.html", {"cart": cart.filter(order_status=False), "status": cart.exists()})
     else:
         cart = Cart.objects.get(id=pk)
