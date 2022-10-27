@@ -6,7 +6,6 @@
 <table class="table table-hover my-2 mb-5 table-light">
   <thead>
     <tr>
-      <th scope="col">id</th>
       <th scope="col">Name</th>
       <th scope="col">Price</th>
       <th scope="col">Quantity</th>
@@ -15,14 +14,13 @@
   <tbody>
   {% for item in cart %}
     <tr>
-      <th scope="row">{{item.id}}</th>
       <td>{{item.product.name}}</td>
       <td>{{item.product.price}}</td>
       <td>{{item.quantity}}</td>
     </tr>
     {% endfor %}
     <tr>
-      <th scope="row" colspan="2">Total</th>
+      <th scope="row" colspan="1">Total</th>
       <td class="table-active">{{total}}</td>
       <td></td>
     </tr>

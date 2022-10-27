@@ -8,13 +8,13 @@ def check(request):
 
 
 urlpatterns = [
-    path("", Home, name="home"),
+    path("", ProductsView, name="home"),
     path("products/", ProductsView, name="products"),
     path("products/add-to-cart/<str:pk>",add_to_cart_view, name="add-to-cart"),
     path("products/buy/", OrderPlaceView, name="PlaceOrder"),
     path("products/buy/<str:pk>", OrderPlaceView, name="buy-now-single"),
-    path("cart/", CartView, name="cart"),
-    path("cart/<str:pk>", CartView, name="remove-cart"),
+    path("cart/", CartListView, name="cart"),
+    path("cart/<str:pk>", CartListView, name="remove-cart"),
     path("myorders/", OrderListView, name="all-orders"),
     path("add-address/", AddressView, name="add-addresses"),
     path("address/", AddressListView, name="all-addresses"),
