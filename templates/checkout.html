@@ -1,0 +1,67 @@
+{% extends 'base.html' %} {% block title %}Cart{% endblock %} {% load static %}
+{%block content%}
+
+<div class="container border my-2 mb-10">
+    <h1>Here is Your Complete Order Details.</h1>
+<table class="table table-hover my-2 mb-5 table-light">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in cart %}
+    <tr>
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.product.name}}</td>
+      <td>{{item.product.price}}</td>
+      <td>{{item.quantity}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      <th scope="row" colspan="2">Total</th>
+      <td class="table-active">{{total}}</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+<div class="container">
+    <h4>Select Address:</h4>
+    {% for address in addresses %}
+    <div class="form-check">
+    {% if address.default %}
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+  {% else %}
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
+  {% endif %}
+  <label class="form-check-label" for="flexRadioDefault1">
+    <div class="card my-2">
+  <div class="card-body w-auto">
+    <p>{{address.pincode}}<p>
+    <span>{{address.landmark}}</span>
+  </div>
+</div>
+  </label>
+</div>
+    {% endfor %}
+
+
+</div>
+<hr>
+<div class="d-flex mb-3">
+<a href="/products/buy/" class="btn btn-primary ms-auto p-2">Place Order</a>
+</div>
+<hr>
+</div>
+
+
+
+
+
+
+
+
+{%endblock%}

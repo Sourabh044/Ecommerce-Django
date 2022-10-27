@@ -42,8 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'fontawesomefree',
-    'rest_framework',
     'core',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api',
     
 ]
 X_FRAME_OPTIONS = "SAMEORIGIN"
@@ -95,6 +97,12 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

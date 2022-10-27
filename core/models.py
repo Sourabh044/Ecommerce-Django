@@ -1,4 +1,5 @@
 # from django.db import models
+from email.policy import default
 from django.contrib.gis.db import models
 from django.contrib.gis.geos import Point
 from uuid import uuid4
@@ -22,7 +23,7 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True, default="No Description")
     price = models.FloatField(blank=False, null=False)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
@@ -34,7 +35,7 @@ class Cart(models.Model):
         Product, on_delete=models.CASCADE, blank=True, null=True
     )
     quantity = models.PositiveSmallIntegerField(default=1)
-
+    order_status = models.BooleanField(default=False)
     def __str__(self) -> str:
         return f"{self.product.name} | {self.quantity}"
 

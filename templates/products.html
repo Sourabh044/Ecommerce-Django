@@ -2,6 +2,14 @@
 {% block title %}Products{% endblock %}
 {% load static %}
 {%block content%}
+
+{% for message in messages %}
+<div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+  <strong>{{ message }}</strong> Go to <a href="/cart/" class="alert-link">Cart</a>.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
     <div class="d-flex justify-content-around my-5">
     {%for product in products%}
     <div class="card" style="width: 18rem;">
@@ -10,8 +18,8 @@
         <h5 class="card-title">{{product}}</h5>
         <p class="card-text">{{product.description}}</p>
         <p class="card-text">${{product.price}}</p>
-        <a href="buy/{{product.id}}" class="btn btn-primary">Add to Cart</a>
-        <a href="buy/" class="btn btn-primary">Buy Now</a>
+        <a href="add-to-cart/{{product.id}}" class="btn btn-primary">Add to Cart</a>
+        <a href="buy/{{product.id}}" class="btn btn-primary">Buy Now</a>
         </div>
     </div>
     {%endfor%}
