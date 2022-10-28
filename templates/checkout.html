@@ -39,9 +39,9 @@
     {% for address in addresses %}
     <div class="form-check">
     {% if address.default %}
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+  <input class="form-check-input" type="radio" name="{{address.id}}" id="{{address.id}}" checked>
   {% else %}
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" >
+  <input class="form-check-input" type="radio" name="{{address.id}}" id="{{address.id}}" >
   {% endif %}
   <label class="form-check-label" for="flexRadioDefault1">
     <div class="card my-2">

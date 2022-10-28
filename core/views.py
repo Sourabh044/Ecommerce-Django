@@ -76,21 +76,21 @@ def Checkout(request, pk=None):
             cart = cart[0]
             print(cart)
             cart.quantity = 1
-            total = cart.product.price*cart.quantity
+            total = cart.product.price * cart.quantity
             addresses = address.objects.filter(user=user)
             return render(
                 request,
                 "checkout.html",
-                {"cart": cart, "total": total, "addresses": addresses,'single':True},
+                {"cart": cart, "total": total, "addresses": addresses, "single": True},
             )
         else:
-            cart = Cart.objects.create(user=user,product=product,quantity=1)
+            cart = Cart.objects.create(user=user, product=product, quantity=1)
             total = cart.product.price
             addresses = address.objects.filter(user=user)
             return render(
                 request,
                 "checkout.html",
-                {"cart": cart, "total": total, "addresses": addresses,'single':True},
+                {"cart": cart, "total": total, "addresses": addresses, "single": True},
             )
     # For odering all the items in teh user cart
     cart = Cart.objects.filter(user=user)
@@ -99,7 +99,7 @@ def Checkout(request, pk=None):
         if cart.exists():
             total = 0
             for item in cart:
-                total += item.product.price*item.quantity
+                total += item.product.price * item.quantity
             addresses = address.objects.filter(user=user)
             return render(
                 request,
@@ -135,16 +135,20 @@ def OrderPlaceView(request, pk=None, **kwargs):
         order.total = product.price
         cart.save()
         order.save()
-        return render(request, "order-completed.html", {"order": order,'total':product.price})
+        return render(
+            request, "order-completed.html", {"order": order, "total": product.price}
+        )
         # return redirect("all-orders")
     Total = 0
     for item in Cart.objects.filter(user=user):
         order.cart.add(item)
         item.order_status = True
         item.save()
-        order.total +=  (item.product.price*item.quantity)
+        order.total += item.product.price * item.quantity
     order.save()
-    return render(request, "order-completed.html", {"order": order,'total':order.total})
+    return render(
+        request, "order-completed.html", {"order": order, "total": order.total}
+    )
 
     # return redirect("all-orders")
 
@@ -158,7 +162,12 @@ def OrderListView(request, pk=None):
         return render(request, "order.html", {"orders": orders})
     else:
         order = Order.objects.get(id=pk)
-        return render(request, 'order-completed.html',{'view':True,'order':order,'total':order.total})
+        return render(
+            request,
+            "order-completed.html",
+            {"view": True, "order": order, "total": order.total},
+        )
+
 
 # All Address Views Here
 
