@@ -12,6 +12,13 @@
     </tr>
   </thead>
   <tbody>
+  {% if single %}
+    <tr>
+      <td>{{cart.product.name}}</td>
+      <td>{{cart.product.price}}</td>
+      <td>{{cart.quantity}}</td>
+    </tr>
+  {% else %}
   {% for item in cart %}
     <tr>
       <td>{{item.product.name}}</td>
@@ -19,6 +26,7 @@
       <td>{{item.quantity}}</td>
     </tr>
     {% endfor %}
+    {% endif %}
     <tr>
       <th scope="row" colspan="1">Total</th>
       <td class="table-active">{{total}}</td>
@@ -45,21 +53,14 @@
   </label>
 </div>
     {% endfor %}
-
-
+<a href="/add-address/" class="btn btn-dark ms-auto p-2">Add New Address</a>
 </div>
 <hr>
 <div class="d-flex mb-3">
-<a href="/products/buy/" class="btn btn-primary ms-auto p-2">Place Order</a>
+<a href="/products" class="btn btn-dark p-2"> <- Go Back </a>
+<a href="/products/buy/" class="btn btn-dark ms-auto p-2">Place Order</a>
 </div>
 <hr>
 </div>
-
-
-
-
-
-
-
 
 {%endblock%}

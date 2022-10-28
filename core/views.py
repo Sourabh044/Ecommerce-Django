@@ -1,3 +1,4 @@
+from math import prod
 from django.shortcuts import HttpResponse, redirect, render
 from .models import *
 from django.contrib.auth import authenticate, login, logout
@@ -21,6 +22,7 @@ def ProductsView(request, pk=None):
 
 # All Cart Views Here
 
+
 def add_to_cart_view(request, pk=None):
     user = request.user
     if not user.is_authenticated:
@@ -36,12 +38,13 @@ def add_to_cart_view(request, pk=None):
         )
         cart = Cart.objects.filter(user_id=user, product=product)
         messages.info(
-            request, f"{product.name} added to your cart| quantity:{cart[0].quantity}"
+            request, f"{product.name} added to your cart | quantity:{cart[0].quantity}"
         )
     else:
         Cart.objects.create(user=user, product=product)
         messages.info(request, f"{product.name} added to your cart")
     return redirect("products")
+
 
 def CartListView(request, pk=None):
     user = request.user
@@ -56,20 +59,47 @@ def CartListView(request, pk=None):
         cart.delete()
         return redirect("cart")
 
+
 # All Checkout Views Here
 
-def Checkout(request):
+
+def Checkout(request, pk=None):
     user = request.user
     if not user.is_authenticated:
         return redirect("login")
 
+    if pk:  # for direct ordering a single product
+        product = Product.objects.get(id=pk)
+        cart = Cart.objects.filter(user=user, product=product, order_status=False)
+        if cart.exists():
+            print(cart)
+            cart = cart[0]
+            print(cart)
+            cart.quantity = 1
+            total = cart.product.price*cart.quantity
+            addresses = address.objects.filter(user=user)
+            return render(
+                request,
+                "checkout.html",
+                {"cart": cart, "total": total, "addresses": addresses,'single':True},
+            )
+        else:
+            cart = Cart.objects.create(user=user,product=product,quantity=1)
+            total = cart.product.price
+            addresses = address.objects.filter(user=user)
+            return render(
+                request,
+                "checkout.html",
+                {"cart": cart, "total": total, "addresses": addresses,'single':True},
+            )
+    # For odering all the items in teh user cart
     cart = Cart.objects.filter(user=user)
     if cart.exists():
         cart = Cart.objects.filter(order_status=False)
         if cart.exists():
             total = 0
             for item in cart:
-                total += item.product.price
+                total += item.product.price*item.quantity
             addresses = address.objects.filter(user=user)
             return render(
                 request,
@@ -80,12 +110,8 @@ def Checkout(request):
     return HttpResponse("No Orderable items in Your Cart")
 
 
-
-
-
-
-
 # All Order Views Here
+
 
 def OrderPlaceView(request, pk=None, **kwargs):
     user = request.user
@@ -109,16 +135,18 @@ def OrderPlaceView(request, pk=None, **kwargs):
         order.total = product.price
         cart.save()
         order.save()
-        return redirect("all-orders")
+        return render(request, "order-completed.html", {"order": order,'total':product.price})
+        # return redirect("all-orders")
     Total = 0
     for item in Cart.objects.filter(user=user):
         order.cart.add(item)
         item.order_status = True
         item.save()
-        order.total = order.total + item.product.price
+        order.total +=  (item.product.price*item.quantity)
     order.save()
-    return redirect("all-orders")
+    return render(request, "order-completed.html", {"order": order,'total':order.total})
 
+    # return redirect("all-orders")
 
 
 def OrderListView(request, pk=None):
@@ -128,8 +156,12 @@ def OrderListView(request, pk=None):
     if not pk:
         orders = Order.objects.filter(order_by=request.user)
         return render(request, "order.html", {"orders": orders})
+    else:
+        order = Order.objects.get(id=pk)
+        return render(request, 'order-completed.html',{'view':True,'order':order,'total':order.total})
 
 # All Address Views Here
+
 
 def AddressView(request, pk=None):
     user = request.user
@@ -201,5 +233,3 @@ def Signup_view(request):
             return redirect("home")
         return redirect("home")
     return render(request, "signup.html")
-
-

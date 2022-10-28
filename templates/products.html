@@ -19,7 +19,7 @@
         <p class="card-text">{{product.description}}</p>
         <p class="card-text">${{product.price}}</p>
         <a href="add-to-cart/{{product.id}}" class="btn btn-primary">Add to Cart</a>
-        <a href="buy/{{product.id}}" class="btn btn-primary">Buy Now</a>
+        <a href="/checkout/{{product.id}}" class="btn btn-primary">Buy Now</a>
         </div>
     </div>
     {%endfor%}
