@@ -9,6 +9,8 @@ router.register(r'products', ProductViewSet)
 
 urlpatterns = [
     path("allproducts", all_products, name="api-products"),
+    path("cart", all_cart_items, name="api-cart"),
+
 
 ]
 urlpatterns += router.urls

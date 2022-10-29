@@ -18,12 +18,13 @@ class Brand(models.Model):
 
 class Product(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False, unique=True)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True,null=True)
     name = models.CharField(max_length=256, blank=False, null=False)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, blank=True, default="No Description")
     price = models.FloatField(blank=False, null=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return self.name
 

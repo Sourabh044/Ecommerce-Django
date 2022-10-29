@@ -90,6 +90,7 @@
           </ul>
         </div>
         {% if user.is_authenticated %}
+        <button class="btn btn-dark">{{user.get_username}}</button>
         <a type="button" class="btn btn-dark" href="/logout/">Logout</a>
         {% else %}
         <a type="button" class="btn btn-dark" href="/login/">Login</a>
@@ -141,5 +142,9 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
+
+      <script>
+      console.log("{{user.get_username}}")
+      </script>
   </body>
 </html>
